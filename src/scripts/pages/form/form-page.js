@@ -28,6 +28,11 @@ export class FormPage {
     }
 
     async afterRender() {
+        try {
+            requireAuth();
+        } catch {
+            return;
+        }
         this.initMap();
 
         document
@@ -35,7 +40,8 @@ export class FormPage {
             .addEventListener('submit', async (e) => {
                 e.preventDefault();
 
-                const token = localStorage.getItem('token');
+                const token = AuthService.getToken();
+
                 if (!token) {
                     Swal.fire('Error', 'Anda belum login', 'error');
                     return;

@@ -1,5 +1,5 @@
 import { AuthModel } from '../../data/auth-model.js';
-import { RegisterPresenter } from '../presenters/register-presenter.js';
+import { RegisterPresenter } from '../../presenters/register-presenter.js';
 import Swal from 'sweetalert2';
 
 export class RegisterPage {

@@ -1,10 +1,11 @@
-import { StoryModel } from '../../data/story-model.js';
-import { HomePresenter } from '../presenters/home-presenter.js';
+import { StoryRepository } from '../../data/story-repository.js';
+import { HomePresenter } from '../../presenters/home-presenter.js';
+import { requireAuth } from '../../middleware/auth-middleware.js';
 
 export class HomePage {
     constructor() {
         this.presenter = null;
-        this._map = null; // ⬅️ untuk menyimpan instance Leaflet map
+        this._map = null;
     }
 
     render() {
@@ -19,11 +20,13 @@ export class HomePage {
     }
 
     async afterRender() {
-        const { StoryModel } = await import('../../data/story-model.js');
-        const { HomePresenter } = await import(
-            '../presenters/home-presenter.js'
-        );
-        this.presenter = new HomePresenter(new StoryModel(), this);
+        try {
+            requireAuth(); // ⛔ redirect jika belum login
+        } catch {
+            return;
+        }
+
+        this.presenter = new HomePresenter(new StoryRepository(), this);
         await this.presenter.loadStories();
     }
 
@@ -58,14 +61,13 @@ export class HomePage {
 
     #initMap(stories) {
         const mapContainer = document.getElementById('map');
-
         if (!mapContainer) {
             console.warn('⚠️ Map container tidak ditemukan.');
             return;
         }
 
         if (this._map) {
-            this._map.remove(); // hapus peta sebelumnya jika ada
+            this._map.remove(); // clear existing map
         }
 
         this._map = L.map(mapContainer).setView([-2.5, 118], 4);

@@ -1,23 +1,25 @@
 export class HomePresenter {
-    constructor(model, view) {
-        this.model = model;
+    constructor(repository, view) {
+        this.repository = repository;
         this.view = view;
     }
 
     async loadStories() {
         try {
             this.view.showLoading();
-            const stories = await this.model.getStoriesWithLocation();
+
+            const stories = await this.repository.getStoriesWithLocation();
             this.view.renderStories(stories);
         } catch (error) {
             if (
-                error.message.includes('Unauthorized') ||
-                error.message.includes('Token')
+                error.message?.includes('Unauthorized') ||
+                error.message?.includes('Token')
             ) {
                 localStorage.removeItem('token');
                 window.location.hash = '#/login';
                 return;
             }
+
             console.error('Presenter Error:', error.message);
             this.view.renderError(error.message || 'Gagal memuat cerita');
         }

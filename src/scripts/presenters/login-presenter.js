@@ -1,3 +1,5 @@
+import { AuthService } from '../data/auth-service.js';
+
 export class LoginPresenter {
     constructor(model, view) {
         this.model = model;
@@ -8,6 +10,10 @@ export class LoginPresenter {
         try {
             this.view.showLoading();
             const user = await this.model.login(email, password);
+
+            // ✅ Simpan token ke AuthService
+            AuthService.saveToken(user.token);
+
             this.view.showSuccessMessage(user.name);
         } catch (error) {
             this.view.showErrorMessage(error.message);
