@@ -1,5 +1,13 @@
+// utils/auth.js
 export function getToken() {
     return localStorage.getItem('token');
+}
+
+export function requireAuth() {
+    if (!getToken()) {
+        window.location.hash = '#/login';
+        throw new Error('Unauthenticated');
+    }
 }
 
 export function isLoggedIn() {
@@ -7,5 +15,7 @@ export function isLoggedIn() {
 }
 
 export function logout() {
-    localStorage.clear();
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('userName');
 }

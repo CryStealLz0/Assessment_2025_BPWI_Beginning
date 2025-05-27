@@ -1,6 +1,7 @@
 import { StoryRepository } from '../../data/story-repository.js';
 import { HomePresenter } from '../../presenters/home-presenter.js';
 import { requireAuth } from '../../middleware/auth-middleware.js';
+import { showFormattedDate } from '../../utils/index.js';
 
 export class HomePage {
     constructor() {
@@ -42,11 +43,16 @@ export class HomePage {
             const item = document.createElement('div');
             item.className = 'story-item';
             item.innerHTML = `
-        <img src="${story.photoUrl}" alt="Cerita oleh ${story.name}" loading="lazy" />
-        <h3>${story.name}</h3>
-        <p>${story.description}</p>
-        <a href="#/detail/${story.id}">Lihat Detail</a>
-      `;
+  <img src="${story.photoUrl}" alt="Cerita oleh ${story.name}" loading="lazy" />
+  <h3>${story.name}</h3>
+  <p>${story.description}</p>
+  <small><strong>Tanggal:</strong> ${showFormattedDate(
+      story.createdAt,
+      'id-ID',
+  )}</small>
+  <br />
+  <a href="#/detail/${story.id}">Lihat Detail</a>
+`;
             container.appendChild(item);
         });
 

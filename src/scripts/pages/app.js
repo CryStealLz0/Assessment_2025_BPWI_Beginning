@@ -37,7 +37,7 @@ class App {
     }
 
     async renderPage() {
-        const guardedRoutes = ['#/tambah'];
+        const guardedRoutes = ['#/tambah', '#/'];
         if (!authGuard(guardedRoutes)) return;
 
         const url = getActiveRoute();

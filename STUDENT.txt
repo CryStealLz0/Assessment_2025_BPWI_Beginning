@@ -1,2 +1,3 @@
-APP_URL=<url_aplikasi>
-MAP_SERVICE_API_KEY=<api_key>
+APP_URL=http://localhost:5173
+MAP_SERVICE_API_KEY=Tidak menggunakan API Key.
+Peta digital menggunakan Leaflet dan OpenStreetMap (gratis dan tanpa key).

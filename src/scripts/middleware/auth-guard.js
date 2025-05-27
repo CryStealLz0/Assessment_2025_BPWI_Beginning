@@ -1,6 +1,16 @@
 // scripts/middleware/auth-guard.js
 import Swal from 'sweetalert2';
 
+// src/scripts/middleware/auth-guard.js
+import { isLoggedIn } from '../utils/auth.js';
+
+export function requireAuth() {
+    if (!isLoggedIn()) {
+        window.location.hash = '#/login';
+        throw new Error('Akses ditolak. Silakan login terlebih dahulu.');
+    }
+}
+
 export function authGuard(allowedRoutes = []) {
     const token = localStorage.getItem('token');
     const currentRoute = location.hash;

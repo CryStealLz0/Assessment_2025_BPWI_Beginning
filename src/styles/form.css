@@ -1,0 +1,18 @@
+.custom-upload-button {
+    display: inline-block;
+    padding: 0.6em 1.2em;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.custom-upload-button:hover {
+    background-color: #45a049;
+}
+
+.preview-container {
+    margin-top: 1rem;
+}
