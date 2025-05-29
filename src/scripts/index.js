@@ -3,6 +3,14 @@ import '../styles/styles.css';
 import App from './pages/app';
 import Swal from 'sweetalert2';
 import { isLoggedIn, logout as clearSession } from './utils/auth.js';
+import { NotificationToggle } from './components/notification-toggle.js';
+
+document.addEventListener('DOMContentLoaded', async () => {
+    const toggle = new NotificationToggle(
+        'BCCs2eonMI-6H2ctvFaWg-UYdDv387Vno_bzUzALpB442r2lCnsHmtrx8biyPi_E-1fSGABK_Qs_GlvPoJJqxbk',
+    );
+    await toggle.afterRender();
+});
 
 function handleLogout() {
     clearSession(); // hanya clear session, tidak ada UI

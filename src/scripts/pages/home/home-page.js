@@ -11,18 +11,17 @@ export class HomePage {
 
     render() {
         return `
-      <section class="home-section">
-        <a href="#main-content" class="skip-link">Lewati ke konten</a>
-        <h2>Beranda - Daftar Cerita</h2>
-        <div id="map" style="height: 300px; margin-bottom: 1rem;"></div>
-        <div id="main-content" class="story-list">Memuat cerita...</div>
+      <section class="home">
+        <h2 class="home__title">Beranda - Daftar Cerita</h2>
+        <div id="map" class="home__map"></div>
+        <div class="home__story-list">Memuat cerita...</div> <!-- ubah dari id ke class -->
       </section>
     `;
     }
 
     async afterRender() {
         try {
-            requireAuth(); // ⛔ redirect jika belum login
+            requireAuth();
         } catch {
             return;
         }
@@ -32,27 +31,34 @@ export class HomePage {
     }
 
     showLoading() {
-        document.getElementById('main-content').innerHTML = 'Memuat cerita...';
+        const container = document.querySelector('.home__story-list');
+        if (container) container.innerHTML = 'Memuat cerita...';
     }
 
     renderStories(stories) {
-        const container = document.getElementById('main-content');
+        const container = document.querySelector('.home__story-list');
         container.innerHTML = '';
 
         stories.forEach((story) => {
             const item = document.createElement('div');
-            item.className = 'story-item';
+            item.className = 'story-card';
             item.innerHTML = `
-  <img src="${story.photoUrl}" alt="Cerita oleh ${story.name}" loading="lazy" />
-  <h3>${story.name}</h3>
-  <p>${story.description}</p>
-  <small><strong>Tanggal:</strong> ${showFormattedDate(
-      story.createdAt,
-      'id-ID',
-  )}</small>
-  <br />
-  <a href="#/detail/${story.id}">Lihat Detail</a>
-`;
+              <h3 class="story-card__name">${story.name}</h3>
+              <img src="${story.photoUrl}" alt="Cerita oleh ${
+                story.name
+            }" class="story-card__image" loading="lazy" />
+              <p class="story-card__description">${story.description}</p>
+              <p class="story-card__location">📍 ${
+                  story.location || 'Lokasi tidak tersedia'
+              }</p>
+              <small class="story-card__date"><strong>Tanggal:</strong> ${showFormattedDate(
+                  story.createdAt,
+                  'id-ID',
+              )}</small>
+              <a href="#/detail/${
+                  story.id
+              }" class="story-card__link">Lihat Detail</a>
+            `;
             container.appendChild(item);
         });
 
@@ -60,13 +66,14 @@ export class HomePage {
     }
 
     renderError(message) {
-        document.getElementById(
-            'main-content',
-        ).innerHTML = `<p style="color:red">${message}</p>`;
+        const container = document.querySelector('.home__story-list');
+        if (container)
+            container.innerHTML = `<p style="color:red">${message}</p>`;
     }
 
     #initMap(stories) {
         const mapContainer = document.getElementById('map');
+
         if (!mapContainer) {
             console.warn('⚠️ Map container tidak ditemukan.');
             return;
