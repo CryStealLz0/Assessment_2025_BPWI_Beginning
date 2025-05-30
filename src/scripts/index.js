@@ -4,16 +4,11 @@ import App from './pages/app';
 import Swal from 'sweetalert2';
 import { isLoggedIn, logout as clearSession } from './utils/auth.js';
 import { NotificationToggle } from './components/notification-toggle.js';
-// import { AvatarProfile } from './components/avatar-profile.js';
+import { renderFooterDropUp } from './pages/templates/footer.js';
 
-// document.addEventListener('DOMContentLoaded', () => {
-//     const userName = localStorage.getItem('userName') || 'Guest';
-//     const avatar = new AvatarProfile('avatar-container', userName);
-//     avatar.generate();
-
-//     const nameText = document.getElementById('username-text');
-//     if (nameText) nameText.textContent = userName;
-// });
+document.addEventListener('DOMContentLoaded', () => {
+    renderFooterDropUp();
+});
 
 document.addEventListener('DOMContentLoaded', async () => {
     const toggle = new NotificationToggle(
@@ -23,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 function handleLogout() {
-    clearSession(); // hanya clear session, tidak ada UI
+    clearSession();
 
     Swal.fire({
         icon: 'success',
@@ -63,11 +58,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         logoutButton.addEventListener('click', handleLogout);
     }
 
-    updateAuthUI(); // saat pertama kali
+    updateAuthUI();
     await app.renderPage();
 
     window.addEventListener('hashchange', async () => {
         await app.renderPage();
-        updateAuthUI(); // saat berpindah halaman
+        updateAuthUI();
     });
 });

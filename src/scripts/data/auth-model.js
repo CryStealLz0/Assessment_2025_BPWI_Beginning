@@ -16,7 +16,6 @@ export class AuthModel {
             throw new Error(result.message || 'Gagal login');
         }
 
-        // Simpan token ke localStorage
         localStorage.setItem('token', result.loginResult.token);
         localStorage.setItem('userName', result.loginResult.name);
         localStorage.setItem('userId', result.loginResult.userId);

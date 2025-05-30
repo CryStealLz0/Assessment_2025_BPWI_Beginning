@@ -1,7 +1,4 @@
-// scripts/middleware/auth-guard.js
 import Swal from 'sweetalert2';
-
-// src/scripts/middleware/auth-guard.js
 import { isLoggedIn } from '../utils/auth.js';
 
 export function requireAuth() {
@@ -14,8 +11,6 @@ export function requireAuth() {
 export function authGuard(allowedRoutes = []) {
     const token = localStorage.getItem('token');
     const currentRoute = location.hash;
-
-    // Jika route butuh auth dan belum login
     if (!token && allowedRoutes.includes(currentRoute)) {
         Swal.fire({
             icon: 'warning',
@@ -26,6 +21,5 @@ export function authGuard(allowedRoutes = []) {
         });
         return false;
     }
-
     return true;
 }

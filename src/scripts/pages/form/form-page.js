@@ -214,17 +214,95 @@ export class FormPage {
 
     initMap() {
         const map = L.map('map').setView([-2.5, 118], 4);
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap contributors',
-        }).addTo(map);
+        const key = 'Z8CPHGSs8sjj4jpKnxkM';
+
+        // Base layers
+        const osm = L.tileLayer(
+            'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            {
+                attribution: '&copy; OpenStreetMap contributors',
+            },
+        );
+
+        const maptilerBasic = L.tileLayer(
+            `https://api.maptiler.com/maps/basic-v2/{z}/{x}/{y}.png?key=${key}`,
+            {
+                tileSize: 512,
+                zoomOffset: -1,
+                attribution: '&copy; MapTiler & contributors',
+            },
+        );
+
+        const maptilerStreets = L.tileLayer(
+            `https://api.maptiler.com/maps/streets-v2/{z}/{x}/{y}.png?key=${key}`,
+            {
+                tileSize: 512,
+                zoomOffset: -1,
+                attribution: '&copy; MapTiler & contributors',
+            },
+        );
+
+        const maptilerSatellite = L.tileLayer(
+            `https://api.maptiler.com/maps/hybrid/{z}/{x}/{y}.jpg?key=${key}`,
+            {
+                tileSize: 512,
+                zoomOffset: -1,
+                attribution: '&copy; MapTiler & contributors',
+            },
+        );
+
+        const maptilerTopo = L.tileLayer(
+            `https://api.maptiler.com/maps/topo-v2/{z}/{x}/{y}.png?key=${key}`,
+            {
+                tileSize: 512,
+                zoomOffset: -1,
+                attribution: '&copy; MapTiler & contributors',
+            },
+        );
+
+        const maptilerDark = L.tileLayer(
+            `https://api.maptiler.com/maps/dataviz-darkmatter/{z}/{x}/{y}.png?key=${key}`,
+            {
+                tileSize: 512,
+                zoomOffset: -1,
+                attribution: '&copy; MapTiler & contributors',
+            },
+        );
+
+        osm.addTo(map);
+
+        const baseLayers = {
+            OpenStreetMap: osm,
+            'MapTiler Basic': maptilerBasic,
+            'MapTiler Streets': maptilerStreets,
+            'MapTiler Satellite': maptilerSatellite,
+            'MapTiler Topo': maptilerTopo,
+            'MapTiler Dark': maptilerDark,
+        };
+
+        L.control.layers(baseLayers).addTo(map);
 
         let marker = null;
 
         map.on('click', (e) => {
             this.selectedLatLng = e.latlng;
             if (marker) map.removeLayer(marker);
-            marker = L.marker(e.latlng).addTo(map);
-            marker.bindPopup('Lokasi dipilih').openPopup();
+
+            // Reverse geocoding request to MapTiler
+            fetch(
+                `https://api.maptiler.com/geocoding/${e.latlng.lng},${e.latlng.lat}.json?key=${key}`,
+            )
+                .then((res) => res.json())
+                .then((data) => {
+                    const placeName =
+                        data?.features?.[0]?.place_name || 'Lokasi dipilih';
+                    marker = L.marker(e.latlng).addTo(map);
+                    marker.bindPopup(placeName).openPopup();
+                })
+                .catch(() => {
+                    marker = L.marker(e.latlng).addTo(map);
+                    marker.bindPopup('Lokasi dipilih').openPopup();
+                });
         });
     }
 }
