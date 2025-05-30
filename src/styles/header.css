@@ -2,6 +2,7 @@ header {
     position: sticky;
     padding: 0rem 2rem;
     background-color: var(--color-gray);
+    border-bottom: 5px solid var(--color-primary);
     top: 0;
     z-index: 100;
 }

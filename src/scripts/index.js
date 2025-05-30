@@ -4,6 +4,16 @@ import App from './pages/app';
 import Swal from 'sweetalert2';
 import { isLoggedIn, logout as clearSession } from './utils/auth.js';
 import { NotificationToggle } from './components/notification-toggle.js';
+// import { AvatarProfile } from './components/avatar-profile.js';
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     const userName = localStorage.getItem('userName') || 'Guest';
+//     const avatar = new AvatarProfile('avatar-container', userName);
+//     avatar.generate();
+
+//     const nameText = document.getElementById('username-text');
+//     if (nameText) nameText.textContent = userName;
+// });
 
 document.addEventListener('DOMContentLoaded', async () => {
     const toggle = new NotificationToggle(

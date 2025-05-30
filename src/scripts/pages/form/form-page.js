@@ -16,30 +16,35 @@ export class FormPage {
 
     render() {
         return `
-      <section>
-        <h2>Tambah Cerita Baru</h2>
-        <form id="story-form">
-          <label for="description">Deskripsi</label><br>
-          <textarea id="description" rows="3" required></textarea><br><br>
+      <section class="form-story container">
+        <h2 class="form-story__title">Tambah Cerita Baru</h2>
+        <form id="story-form" class="form-story__form">
+          <div class="form-story__group">
+            <label for="description" class="form-story__label">Deskripsi</label>
+            <textarea id="description" class="form-story__textarea" rows="3" required></textarea>
+          </div>
+          <div class="form-story__group">
+            <label for="photo" class="form-story__label">Pilih Gambar dari File:</label>
+            <input id="photo" class="form-story__input" type="file" accept="image/*" />
+          </div>
+          <div class="form-story__group">
+            <p class="form-story__or">Atau ambil foto langsung:</p>
+            <div class="form-story__buttons">
+              <button type="button" id="camera-start" class="form-story__button">Aktifkan Kamera</button>
+              <button type="button" id="camera-stop" class="form-story__button form-story__button--danger" style="display:none;">Matikan Kamera</button>
+            </div>
+            <video id="camera-video" class="form-story__video" autoplay style="display:none;"></video>
+            <button type="button" id="camera-capture" class="form-story__button" style="display:none;">Ambil Foto</button>
+            <canvas id="camera-canvas" style="display:none;"></canvas>
+            <div id="photo-preview" class="form-story__preview"></div>
+          </div>
 
-          <label for="photo">Pilih Gambar dari File:</label><br>
-          <input id="photo" type="file" accept="image/*" /><br><br>
+          <div class="form-story__group">
+            <label for="map" class="form-story__label">Klik lokasi pada peta:</label>
+            <div id="map" class="form-story__map"></div>
+          </div>
 
-          <p>Atau ambil foto langsung:</p>
-          <button type="button" id="camera-start">📷 Aktifkan Kamera</button>
-          <button type="button" id="camera-stop" style="display:none;">❌ Matikan Kamera</button><br><br>
-
-          <video id="camera-video" autoplay style="max-width:100%; height:auto; display:none;"></video><br>
-          <button type="button" id="camera-capture" style="display:none;">📸 Ambil Foto</button>
-
-          <canvas id="camera-canvas" style="display:none;"></canvas><br>
-
-          <div id="photo-preview" class="preview-container" style="margin-top:1rem;"></div>
-
-          <label for="map">Klik lokasi pada peta:</label>
-          <div id="map" style="height: 300px; margin-bottom: 1rem;"></div>
-
-          <button type="submit">Kirim Cerita</button>
+          <button type="submit" class="form-story__submit">Kirim Cerita</button>
         </form>
       </section>
     `;
@@ -107,8 +112,8 @@ export class FormPage {
         const previewContainer = document.getElementById('photo-preview');
 
         photoInput.addEventListener('change', (e) => {
-            this.capturedImage = null; // reset hasil kamera jika user pilih file
-            this.stopCamera(); // otomatis matikan kamera
+            this.capturedImage = null;
+            this.stopCamera();
 
             const file = e.target.files[0];
             if (!file) return;
@@ -134,7 +139,7 @@ export class FormPage {
 
         startBtn.addEventListener('click', async () => {
             try {
-                fileInput.value = ''; // reset input file
+                fileInput.value = '';
                 this.capturedImage = null;
 
                 this.cameraStream = await navigator.mediaDevices.getUserMedia({

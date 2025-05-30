@@ -2,6 +2,8 @@ import { StoryRepository } from '../../data/story-repository.js';
 import { HomePresenter } from '../../presenters/home-presenter.js';
 import { requireAuth } from '../../middleware/auth-middleware.js';
 import { showFormattedDate } from '../../utils/index.js';
+import { AvatarProfile } from '../../components/avatar-profile.js';
+import '../templates/my-profile.js';
 
 export class HomePage {
     constructor() {
@@ -13,8 +15,9 @@ export class HomePage {
         return `
       <section class="home">
         <h2 class="home__title">Beranda - Daftar Cerita</h2>
+        <my-profile></my-profile>
         <div id="map" class="home__map"></div>
-        <div class="home__story-list">Memuat cerita...</div> <!-- ubah dari id ke class -->
+        <div class="home__story-list ">Memuat cerita...</div> <!-- ubah dari id ke class -->
       </section>
     `;
     }
@@ -39,27 +42,36 @@ export class HomePage {
         const container = document.querySelector('.home__story-list');
         container.innerHTML = '';
 
-        stories.forEach((story) => {
+        stories.forEach((story, index) => {
             const item = document.createElement('div');
             item.className = 'story-card';
+            const avatarId = `story-avatar-${index}`;
             item.innerHTML = `
+            <div class="story-card__header" >
+              <div id="${avatarId}" class="story-card__avatar"></div>
               <h3 class="story-card__name">${story.name}</h3>
-              <img src="${story.photoUrl}" alt="Cerita oleh ${
+            </div>
+            <img src="${story.photoUrl}" alt="Cerita oleh ${
                 story.name
             }" class="story-card__image" loading="lazy" />
-              <p class="story-card__description">${story.description}</p>
-              <p class="story-card__location">📍 ${
-                  story.location || 'Lokasi tidak tersedia'
-              }</p>
-              <small class="story-card__date"><strong>Tanggal:</strong> ${showFormattedDate(
-                  story.createdAt,
-                  'id-ID',
-              )}</small>
-              <a href="#/detail/${
-                  story.id
-              }" class="story-card__link">Lihat Detail</a>
-            `;
+            <p class="story-card__description">${story.description}</p>
+            <p class="story-card__location"> ${
+                story.location || 'Lokasi tidak tersedia'
+            }</p>
+            <small class="story-card__date"><strong>Tanggal:</strong> ${showFormattedDate(
+                story.createdAt,
+                'id-ID',
+            )}</small>
+            <a href="#/detail/${
+                story.id
+            }" class="story-card__link">Lihat Detail</a>
+          `;
+
             container.appendChild(item);
+
+            // Inisialisasi avatar
+            const avatar = new AvatarProfile(avatarId, story.name);
+            avatar.generate(40); // Ukuran kecil
         });
 
         this.#initMap(stories);

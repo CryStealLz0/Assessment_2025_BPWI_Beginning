@@ -1,7 +1,10 @@
 @import url(./utility.css);
-@import url(./home.css);
-@import url(./form.css);
 @import url(./header.css);
+@import url(./home.css);
+@import url(./about.css);
+@import url(./form.css);
+@import url(./login.css);
+@import url(./regis.css);
 
 :root {
     --color-dark: #222831;

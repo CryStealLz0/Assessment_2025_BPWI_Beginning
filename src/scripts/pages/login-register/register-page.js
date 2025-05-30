@@ -9,19 +9,24 @@ export class RegisterPage {
 
     render() {
         return `
-      <section class="register-section">
-        <h2>Daftar Akun</h2>
-        <form id="register-form" class="form">
-          <label for="name">Nama</label>
-          <input id="name" type="text" placeholder="Nama Lengkap" required />
-          
-          <label for="email">Email</label>
-          <input id="email" type="email" placeholder="Email" required />
-          
-          <label for="password">Password</label>
-          <input id="password" type="password" placeholder="Password (min. 8 karakter)" required />
-          
-          <button type="submit">Daftar</button>
+      <section class="register-section container">
+        <h2 class="register-section__title">Daftar Akun</h2>
+        <form id="register-form" class="register-form">
+          <div class="register-form__group">
+            <label for="name" class="register-form__label">Nama</label>
+            <input id="name" type="text" class="register-form__input" placeholder="Nama Lengkap" required />
+          </div>
+          <div class="register-form__group">
+            <label for="email" class="register-form__label">Email</label>
+            <input id="email" type="email" class="register-form__input" placeholder="Email" required />
+          </div>
+          <div class="register-form__group">
+            <label for="password" class="register-form__label">Password</label>
+            <input id="password" type="password" class="register-form__input" placeholder="Password (min. 8 karakter)" required />
+          </div>
+          <button type="submit" class="register-form__button">Daftar</button>
+          <a href="#/login" class="login-form__button">Login</a>
+
         </form>
       </section>
     `;

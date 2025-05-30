@@ -9,17 +9,22 @@ export class LoginPage {
 
     render() {
         return `
-      <section class="login-section">
-        <h2>Login ke Aplikasi</h2>
-        <form id="login-form" class="form">
-          <label for="email">Email</label>
-          <input id="email" type="email" placeholder="Email" required />
-          
-          <label for="password">Password</label>
-          <input id="password" type="password" placeholder="Password" required />
-          
-          <button type="submit">Login</button>
-          <p>Belum punya akun? <a href="#/register">Daftar di sini</a></p>
+      <section class="login-section container">
+        <h2 class="login-section__title">Login ke Aplikasi</h2>
+        <form id="login-form" class="login-form">
+          <div class="login-form__group">
+            <label for="email" class="login-form__label">Email</label>
+            <input id="email" type="email" class="login-form__input" placeholder="Email" required />
+          </div>
+          <div class="login-form__group">
+            <label for="password" class="login-form__label">Password</label>
+            <input id="password" type="password" class="login-form__input" placeholder="Password" required />
+          </div>
+          <button type="submit" class="login-form__button">Login</button>
+          <p class="login-form__register-text">
+            Belum punya akun?
+            <a href="#/register" class="login-form__link">Daftar di sini</a>
+          </p>
         </form>
       </section>
     `;
