@@ -36,13 +36,11 @@ export default class AboutPage {
           </div>
         </div>
         <p class="about__footer">
-          Dibuat sebagai bagian dari proyek submission Dicoding Front-End Web Developer.
+          Dibuat sebagai bagian dari Tugas proyek submission Dicoding.
         </p>
       </section>
     `;
     }
 
-    async afterRender() {
-        // no interaksi dinamis dibutuhkan
-    }
+    async afterRender() {}
 }

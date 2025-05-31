@@ -10,7 +10,8 @@
 
 .register-section__title {
     text-align: center;
-    color: var(--color-primary);
+    color: var(--color-primary-light);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
     margin-bottom: 1.5rem;
     font-size: 1.8rem;
 }

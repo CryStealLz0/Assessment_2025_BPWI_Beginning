@@ -39,12 +39,10 @@ export class DetailPage {
 
             const story = result.story;
 
-            // Tampilkan avatar dan nama
             document.getElementById('detail-name').textContent = story.name;
             const avatar = new AvatarProfile('detail-avatar', story.name);
             avatar.generate(48);
 
-            // Tampilkan detail cerita
             document.getElementById('story-detail').innerHTML = `
               <img src="${story.photoUrl}" alt="Foto oleh ${story.name}" />
               <p><strong>Deskripsi:</strong> ${story.description}</p>
@@ -58,7 +56,6 @@ export class DetailPage {
               }
             `;
 
-            // Tampilkan peta jika ada lokasi
             if (story.lat && story.lon) {
                 const key = 'Z8CPHGSs8sjj4jpKnxkM';
                 const map = L.map('map').setView([story.lat, story.lon], 13);
@@ -115,7 +112,6 @@ export class DetailPage {
                     },
                 );
 
-                // Set default
                 osm.addTo(map);
 
                 const baseLayers = {
@@ -129,7 +125,6 @@ export class DetailPage {
 
                 L.control.layers(baseLayers).addTo(map);
 
-                // Reverse Geocoding
                 fetch(
                     `https://api.maptiler.com/geocoding/${story.lon},${story.lat}.json?key=${key}`,
                 )

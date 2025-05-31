@@ -216,7 +216,6 @@ export class FormPage {
         const map = L.map('map').setView([-2.5, 118], 4);
         const key = 'Z8CPHGSs8sjj4jpKnxkM';
 
-        // Base layers
         const osm = L.tileLayer(
             'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
             {
@@ -288,7 +287,6 @@ export class FormPage {
             this.selectedLatLng = e.latlng;
             if (marker) map.removeLayer(marker);
 
-            // Reverse geocoding request to MapTiler
             fetch(
                 `https://api.maptiler.com/geocoding/${e.latlng.lng},${e.latlng.lat}.json?key=${key}`,
             )

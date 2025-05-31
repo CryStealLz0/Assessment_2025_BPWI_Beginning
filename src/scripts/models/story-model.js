@@ -1,4 +1,3 @@
-// src/scripts/models/story-model.js
 export class StoryModel {
     constructor({ id, name, description, photoUrl, createdAt, lat, lon }) {
         this.id = id;

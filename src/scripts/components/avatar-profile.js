@@ -25,6 +25,7 @@ export class AvatarProfile {
         width: ${size}px;
         height: ${size}px;
         border-radius: 50%;
+        box-shadow: 2px 2px 5px rgba(40, 40, 40, 1);
         background-color: ${bgColor};
         color: white;
         font-size: ${size / 2.5}px;

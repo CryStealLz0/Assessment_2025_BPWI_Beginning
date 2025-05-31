@@ -6,7 +6,8 @@
 }
 
 .form-story__title {
-    color: var(--color-primary);
+    color: var(--color-primary-light);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
     text-align: center;
     margin-bottom: 2rem;
 }

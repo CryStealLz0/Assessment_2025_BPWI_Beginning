@@ -1,4 +1,3 @@
-// scripts/index.js
 import '../styles/styles.css';
 import App from './pages/app';
 import Swal from 'sweetalert2';

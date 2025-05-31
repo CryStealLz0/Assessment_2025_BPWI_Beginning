@@ -1,11 +1,10 @@
 import { getToken } from '../utils/auth';
+import CONFIG from '../config.js';
 
 export class NotificationRepository {
-    #BASE_URL = 'https://story-api.dicoding.dev/v1';
-
     async subscribe(payload) {
         const response = await fetch(
-            `${this.#BASE_URL}/notifications/subscribe`,
+            `${CONFIG.BASE_URL}/notifications/subscribe`,
             {
                 method: 'POST',
                 headers: {
@@ -23,7 +22,7 @@ export class NotificationRepository {
 
     async unsubscribe(endpoint) {
         const response = await fetch(
-            `${this.#BASE_URL}/notifications/subscribe`,
+            `${CONFIG.BASE_URL}/notifications/subscribe`,
             {
                 method: 'DELETE',
                 headers: {

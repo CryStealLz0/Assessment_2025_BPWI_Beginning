@@ -1,10 +1,8 @@
-// src/scripts/data/story-repository.js
 import { getToken } from '../utils/auth.js';
 import { StoryModel } from '../models/story-model.js';
+import CONFIG from '../config.js';
 
 export class StoryRepository {
-    #BASE_URL = 'https://story-api.dicoding.dev/v1';
-
     async getStoriesWithLocation() {
         const token = getToken();
         if (!token) {
@@ -12,7 +10,7 @@ export class StoryRepository {
             return Promise.reject(new Error('Tidak ada token'));
         }
 
-        const response = await fetch(`${this.#BASE_URL}/stories?location=1`, {
+        const response = await fetch(`${CONFIG.BASE_URL}/stories?location=1`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -36,7 +34,7 @@ export class StoryRepository {
         formData.append('lat', lat);
         formData.append('lon', lon);
 
-        const response = await fetch(`${this.#BASE_URL}/stories`, {
+        const response = await fetch(`${CONFIG.BASE_URL}/stories`, {
             method: 'POST',
             headers: {
                 Authorization: `Bearer ${token}`,

@@ -1,8 +1,8 @@
-const BASE_URL = 'https://story-api.dicoding.dev/v1';
+import CONFIG from '../config.js';
 
 export class AuthModel {
     async login(email, password) {
-        const response = await fetch(`${BASE_URL}/login`, {
+        const response = await fetch(`${CONFIG.BASE_URL}/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ export class AuthModel {
     }
 
     async register(name, email, password) {
-        const response = await fetch(`${BASE_URL}/register`, {
+        const response = await fetch(`${CONFIG.BASE_URL}/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

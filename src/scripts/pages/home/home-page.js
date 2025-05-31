@@ -1,4 +1,3 @@
-// home-page.js with MapTiler layer control (BEM ready styling)
 import { StoryRepository } from '../../data/story-repository.js';
 import { HomePresenter } from '../../presenters/home-presenter.js';
 import { requireAuth } from '../../middleware/auth-middleware.js';
@@ -70,12 +69,8 @@ export class HomePage {
         `;
 
             container.appendChild(item);
-
-            // Avatar inisial
             const avatar = new AvatarProfile(avatarId, story.name);
             avatar.generate(40);
-
-            // Reverse geocoding lokasi
             const locationElem = document.getElementById(locationId);
             const key = 'Z8CPHGSs8sjj4jpKnxkM';
 
@@ -123,7 +118,6 @@ export class HomePage {
         this._map = L.map(mapContainer).setView([-2.5, 118], 4);
         const key = 'Z8CPHGSs8sjj4jpKnxkM';
 
-        // Tile layers
         const openStreetMap = L.tileLayer(
             'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
             {
@@ -149,10 +143,8 @@ export class HomePage {
             },
         );
 
-        // Set default
         openStreetMap.addTo(this._map);
 
-        // Add layer control
         const baseLayers = {
             OpenStreetMap: openStreetMap,
             'Dark (MapTiler)': mapTilerDark,
@@ -160,7 +152,6 @@ export class HomePage {
         };
         L.control.layers(baseLayers).addTo(this._map);
 
-        // Tambahkan marker dengan reverse geocoding
         stories.forEach((story) => {
             console.log('Mapping story:', story.name, story.lat, story.lon);
             if (story.lat && story.lon) {

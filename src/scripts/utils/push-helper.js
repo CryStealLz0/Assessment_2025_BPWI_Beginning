@@ -1,5 +1,3 @@
-// src/scripts/utils/push-helper.js
-
 export async function registerServiceWorker() {
     if (!('serviceWorker' in navigator)) return null;
     return await navigator.serviceWorker.register('/service-worker.js');

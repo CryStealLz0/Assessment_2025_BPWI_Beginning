@@ -12,26 +12,23 @@
     --color-dark: #222831;
     --color-gray: #393e46;
     --color-primary: #00adb5;
+    --color-primary-light: rgb(0, 230, 230);
     --color-light: #eeeeee;
 }
 
-/* Ukuran scrollbar */
 ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
 }
 
-/* Track (latar belakang) */
 ::-webkit-scrollbar-track {
     background: var(--color-gray);
 }
 
-/* Handle (scroll-nya) */
 ::-webkit-scrollbar-thumb {
     background: var(--color-primary);
 }
 
-/* Saat hover di scroll */
 ::-webkit-scrollbar-thumb:hover {
     background: aqua;
 }
@@ -102,5 +99,59 @@ main#main-content {
 
     .drawer-button {
         display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .story-card__image {
+        height: 180px;
+    }
+
+    .story-card__description,
+    .story-card__location,
+    .story-card__date {
+        font-size: 0.85rem;
+    }
+
+    .story-card__link {
+        font-size: 0.95rem;
+    }
+
+    .home {
+        padding: 2rem 0rem;
+    }
+
+    .home__title {
+        font-size: 1.5rem;
+    }
+
+    .home__profile {
+        margin: 1rem 1rem;
+    }
+
+    .profile__name {
+        font-size: 1rem;
+    }
+
+    .home__map {
+        margin: 2.5rem 1rem;
+    }
+
+    main#main-content {
+        padding: 2rem 0rem;
+    }
+
+    .footer-toggle {
+        bottom: 0.2rem;
+        left: 1rem;
+        right: auto;
+        transition: 0.3s ease;
+        border-radius: 0px;
+    }
+
+    .footer-toggle--responsif {
+        bottom: calc(4rem - 3px);
+        left: 1rem;
+        right: 1rem;
     }
 }

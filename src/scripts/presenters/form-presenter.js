@@ -1,4 +1,3 @@
-// src/scripts/presenters/form-presenter.js
 export class FormPresenter {
     constructor(repository, view) {
         this.repository = repository;

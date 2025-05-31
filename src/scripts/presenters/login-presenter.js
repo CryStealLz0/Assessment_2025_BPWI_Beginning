@@ -11,7 +11,6 @@ export class LoginPresenter {
             this.view.showLoading();
             const user = await this.model.login(email, password);
 
-            // ✅ Simpan token ke AuthService
             AuthService.saveToken(user.token);
 
             this.view.showSuccessMessage(user.name);
