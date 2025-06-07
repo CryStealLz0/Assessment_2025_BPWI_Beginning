@@ -47,7 +47,7 @@ function updateAuthUI() {
             item.style.display = 'list-item';
         });
 
-        loginLink.style.display = 'none'; // sembunyikan login setelah login
+        loginLink.style.display = 'none';
     } else {
         loginLink.style.display = 'inline-block';
         logoutButton.style.display = 'none';
