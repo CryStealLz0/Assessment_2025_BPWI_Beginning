@@ -1,8 +1,18 @@
+import Swal from 'sweetalert2';
+import 'leaflet/dist/leaflet.css';
+import { requireAuth } from '../../middleware/auth-guard';
+import { LoginPage } from '../login-register/login-page';
+
 export default class AboutPage {
     async render() {
+        try {
+            requireAuth();
+        } catch {
+            return '';
+        }
         return `
       <section class="about">
-        <h1 class="about__title">Tentang Aplikasi Cerita Lokasi</h1>
+        <h1 class="about__title">Tentang Story Map Kita</h1>
         <p class="about__description">
           Aplikasi ini merupakan platform berbasis web yang memungkinkan pengguna untuk:
         </p>

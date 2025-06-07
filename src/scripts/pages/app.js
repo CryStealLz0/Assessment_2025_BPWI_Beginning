@@ -1,6 +1,7 @@
-import routes from '../routes/routes';
-import { getActiveRoute } from '../routes/url-parser';
+import routes from '../routes/routes.js';
+import { getActiveRoute } from '../routes/url-parser.js';
 import { authGuard } from '../middleware/auth-guard.js';
+import { transitionHelper } from '../utils/index.js';
 
 class App {
     #content = null;
@@ -43,8 +44,18 @@ class App {
         const url = getActiveRoute();
         const page = routes[url];
 
-        this.#content.innerHTML = await page.render();
-        await page.afterRender();
+        const transition = transitionHelper({
+            updateDOM: async () => {
+                const html = await page.render();
+                if (!html) throw new Error('Render returned undefined/null!');
+                this.#content.innerHTML = html;
+                await page.afterRender();
+            },
+        });
+
+        transition.updateCallbackDone?.then(() => {
+            scrollTo({ top: 0, behavior: 'instant' });
+        });
     }
 }
 

@@ -24,9 +24,8 @@ export class RegisterPage {
             <label for="password" class="register-form__label">Password</label>
             <input id="password" type="password" class="register-form__input" placeholder="Password (min. 8 karakter)" required />
           </div>
-          <button type="submit" class="register-form__button">Daftar</button>
-          <a href="#/login" class="login-form__button">Login</a>
-
+          <button type="submit" class="register-form__button">Buat Akun</button>
+          <a href="#/login" class="login-form__button">Kembali</a>
         </form>
       </section>
     `;
@@ -37,14 +36,18 @@ export class RegisterPage {
         this.presenter = new RegisterPresenter(model, this);
 
         const form = document.getElementById('register-form');
-        form.addEventListener('submit', async (event) => {
-            event.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+        if (form) {
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                const name = document.getElementById('name')?.value;
+                const email = document.getElementById('email')?.value;
+                const password = document.getElementById('password')?.value;
 
-            await this.presenter.registerUser(name, email, password);
-        });
+                await this.presenter.registerUser(name, email, password);
+            });
+        } else {
+            console.warn('Form register tidak ditemukan di DOM.');
+        }
     }
 
     showLoading() {

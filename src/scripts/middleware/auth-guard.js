@@ -3,7 +3,13 @@ import { isLoggedIn } from '../utils/auth.js';
 
 export function requireAuth() {
     if (!isLoggedIn()) {
-        window.location.hash = '#/login';
+        Swal.fire({
+            icon: 'warning',
+            title: 'Akses Ditolak',
+            text: 'Silakan login terlebih dahulu.',
+        }).then(() => {
+            window.location.hash = '#/login';
+        });
         throw new Error('Akses ditolak. Silakan login terlebih dahulu.');
     }
 }

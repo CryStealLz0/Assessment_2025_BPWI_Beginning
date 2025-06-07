@@ -16,9 +16,11 @@ export class AuthModel {
             throw new Error(result.message || 'Gagal login');
         }
 
-        localStorage.setItem('token', result.loginResult.token);
-        localStorage.setItem('userName', result.loginResult.name);
-        localStorage.setItem('userId', result.loginResult.userId);
+        const { token, name, userId } = result.loginResult;
+
+        localStorage.setItem('token', token);
+        localStorage.setItem('userName', name);
+        localStorage.setItem('userId', userId);
 
         return result.loginResult;
     }

@@ -32,16 +32,30 @@ function handleLogout() {
 
 function updateAuthUI() {
     const loginLink = document.getElementById('loginLink');
+    const registerLink = document.querySelector('a[href="#/register"]');
     const logoutButton = document.getElementById('logoutButton');
+    const authRequiredItems = document.querySelectorAll('.auth-required');
 
     if (!loginLink || !logoutButton) return;
 
     if (isLoggedIn()) {
-        loginLink.style.display = 'none';
+        loginLink.style.display = 'inline-block';
         logoutButton.style.display = 'inline-block';
+        if (registerLink) registerLink.style.display = 'none';
+
+        authRequiredItems.forEach((item) => {
+            item.style.display = 'list-item';
+        });
+
+        loginLink.style.display = 'none'; // sembunyikan login setelah login
     } else {
         loginLink.style.display = 'inline-block';
         logoutButton.style.display = 'none';
+        if (registerLink) registerLink.style.display = 'inline-block';
+
+        authRequiredItems.forEach((item) => {
+            item.style.display = 'none';
+        });
     }
 }
 

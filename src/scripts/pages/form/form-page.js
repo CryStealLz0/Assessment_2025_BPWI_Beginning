@@ -28,7 +28,7 @@ export class FormPage {
             <input id="photo" class="form-story__input" type="file" accept="image/*" />
           </div>
           <div class="form-story__group">
-            <p class="form-story__or">Atau ambil foto langsung:</p>
+            <span class="form-story__label">Atau ambil foto langsung:</span>
             <div class="form-story__buttons">
               <button type="button" id="camera-start" class="form-story__button">Aktifkan Kamera</button>
               <button type="button" id="camera-stop" class="form-story__button form-story__button--danger" style="display:none;">Matikan Kamera</button>
@@ -38,12 +38,10 @@ export class FormPage {
             <canvas id="camera-canvas" style="display:none;"></canvas>
             <div id="photo-preview" class="form-story__preview"></div>
           </div>
-
           <div class="form-story__group">
-            <label for="map" class="form-story__label">Klik lokasi pada peta:</label>
-            <div id="map" class="form-story__map"></div>
+            <span class="form-story__label">Klik lokasi pada peta:</span>
+            <div id="map" class="form-story__map" aria-label="Peta untuk memilih lokasi cerita"></div>
           </div>
-
           <button type="submit" class="form-story__submit">Kirim Cerita</button>
         </form>
       </section>

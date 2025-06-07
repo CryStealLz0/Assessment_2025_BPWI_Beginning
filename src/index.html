@@ -15,15 +15,21 @@
         <script type="module" src="/scripts/index.js"></script>
     </head>
     <body>
+        <a href="#main-content" class="skip-link">Lewati ke Konten Utama</a>
         <header>
             <div class="main-header">
                 <a class="brand-name" href="#/">StoryMapKita</a>
+
                 <nav id="navigation-drawer" class="navigation-drawer">
                     <ul id="nav-list" class="nav-list">
-                        <li><a href="#/">Beranda</a></li>
-                        <li><a href="#/about">About</a></li>
-                        <li><a href="#/tambah">Tambah</a></li>
-                        <li>
+                        <li class="auth-required"><a href="#/">Beranda</a></li>
+                        <li class="auth-required">
+                            <a href="#/about">About</a>
+                        </li>
+                        <li class="auth-required">
+                            <a href="#/tambah">Tambah</a>
+                        </li>
+                        <li class="auth-required">
                             <label
                                 style="
                                     display: flex;
@@ -45,6 +51,14 @@
                         </li>
                         <li>
                             <a
+                                href="#/register"
+                                id="loginLink"
+                                class="btn-style"
+                                >Register</a
+                            >
+                        </li>
+                        <li>
+                            <a
                                 href="#"
                                 id="logoutButton"
                                 style="display: none"
@@ -61,7 +75,7 @@
             </div>
         </header>
 
-        <main id="main-content" class="main-content"></main>
+        <main id="main-content" tabindex="-1" class="main-content"></main>
 
         <footer id="footer"></footer>
     </body>
