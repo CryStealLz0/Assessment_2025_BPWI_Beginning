@@ -17,7 +17,7 @@ export class FormPage {
     render() {
         return `
       <section class="form-story container">
-        <h2 class="form-story__title">Tambah Cerita Baru</h2>
+        <h1 class="form-story__title">Tambah Cerita Baru</h1>
         <form id="story-form" class="form-story__form">
           <div class="form-story__group">
             <label for="description" class="form-story__label">Deskripsi</label>
@@ -59,6 +59,11 @@ export class FormPage {
         this.initMap();
         this.initPreviewHandler();
         this.initCameraHandlers();
+
+        if (!this._cameraListenerAdded) {
+            window.addEventListener('hashchange', () => this.stopCamera());
+            this._cameraListenerAdded = true;
+        }
 
         document
             .getElementById('story-form')
@@ -186,11 +191,14 @@ export class FormPage {
             this.cameraStream = null;
         }
 
-        video.srcObject = null;
-        video.style.display = 'none';
-        captureBtn.style.display = 'none';
-        stopBtn.style.display = 'none';
-        startBtn.style.display = 'inline-block';
+        if (video) {
+            video.srcObject = null;
+            video.style.display = 'none';
+        }
+
+        if (captureBtn) captureBtn.style.display = 'none';
+        if (stopBtn) stopBtn.style.display = 'none';
+        if (startBtn) startBtn.style.display = 'inline-block';
     }
 
     showLoading() {

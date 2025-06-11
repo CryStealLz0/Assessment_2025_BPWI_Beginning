@@ -10,7 +10,7 @@ export class RegisterPage {
     render() {
         return `
       <section class="register-section container">
-        <h2 class="register-section__title">Daftar Akun</h2>
+        <h1 class="register-section__title">Daftar Akun</h1>
         <form id="register-form" class="register-form">
           <div class="register-form__group">
             <label for="name" class="register-form__label">Nama</label>

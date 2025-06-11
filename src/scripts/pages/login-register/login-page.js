@@ -10,7 +10,7 @@ export class LoginPage {
     render() {
         return `
       <section class="login-section container">
-        <h2 class="login-section__title">Masuk ke Aplikasi</h2>
+        <h1 class="login-section__title">Masuk ke Aplikasi</h1>
         <form id="login-form" class="login-form">
           <div class="login-form__group">
             <label for="email" class="login-form__label">Email</label>

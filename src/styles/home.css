@@ -11,6 +11,13 @@
     color: var(--color-light);
 }
 
+.home__title__sub {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: var(--color-light);
+}
+
 .home__profile {
     display: flex;
     align-items: center;

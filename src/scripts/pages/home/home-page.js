@@ -15,10 +15,21 @@ export class HomePage {
     render() {
         return `
       <section class="home">
-        <h2 class="home__title">Beranda - Daftar Cerita</h2>
-        <my-profile></my-profile>
-        <div id="map" class="home__map"></div>
-        <div class="home__story-list">Memuat cerita...</div>
+        <h1 class="home__title">Beranda</h1>
+
+        <section>
+          <my-profile></my-profile>
+        </section>
+
+        <section>
+          <h2 class="home__title__sub">Peta Lokasi Cerita</h2>
+          <div id="map" class="home__map" role="region" aria-label="Peta Cerita"></div>
+        </section>
+
+        <section>
+          <h2 class="home__title__sub">Daftar Cerita</h2>
+          <div class="home__story-list">Memuat cerita...</div>
+        </section>
       </section>
     `;
     }
@@ -44,33 +55,37 @@ export class HomePage {
         container.innerHTML = '';
 
         stories.forEach((story, index) => {
-            const item = document.createElement('div');
+            const item = document.createElement('article');
             item.className = 'story-card';
+            item.setAttribute('role', 'article');
+
             const avatarId = `story-avatar-${index}`;
             const locationId = `story-location-${index}`;
 
             item.innerHTML = `
-            <div class="story-card__header">
+              <div class="story-card__header">
                 <div id="${avatarId}" class="story-card__avatar"></div>
                 <h3 class="story-card__name">${story.name}</h3>
-            </div>
-            <img src="${story.photoUrl}" alt="Cerita oleh ${
+              </div>
+              <img src="${story.photoUrl}" alt="Cerita oleh ${
                 story.name
             }" class="story-card__image" loading="lazy" />
-            <p class="story-card__description">${story.description}</p>
-            <p id="${locationId}" class="story-card__location">Memuat lokasi...</p>
-            <small class="story-card__date"><strong>Tanggal:</strong> ${showFormattedDate(
-                story.createdAt,
-                'id-ID',
-            )}</small>
-            <a href="#/detail/${
-                story.id
-            }" class="story-card__link">Lihat Detail</a>
-        `;
+              <p class="story-card__description">${story.description}</p>
+              <p id="${locationId}" class="story-card__location">Memuat lokasi...</p>
+              <small class="story-card__date"><strong>Tanggal:</strong> ${showFormattedDate(
+                  story.createdAt,
+                  'id-ID',
+              )}</small>
+              <a href="#/detail/${
+                  story.id
+              }" class="story-card__link">Lihat Detail</a>
+            `;
 
             container.appendChild(item);
+
             const avatar = new AvatarProfile(avatarId, story.name);
             avatar.generate(40);
+
             const locationElem = document.getElementById(locationId);
             const key = 'Z8CPHGSs8sjj4jpKnxkM';
 
@@ -153,7 +168,6 @@ export class HomePage {
         L.control.layers(baseLayers).addTo(this._map);
 
         stories.forEach((story) => {
-            console.log('Mapping story:', story.name, story.lat, story.lon);
             if (story.lat && story.lon) {
                 fetch(
                     `https://api.maptiler.com/geocoding/${story.lon},${story.lat}.json?key=${key}`,

@@ -6,10 +6,11 @@
 }
 
 .about__title {
-    color: var(--color-primary-light);
-    text-shadow: 2px 2px 5px black;
     text-align: center;
-    margin-bottom: 1rem;
+    color: var(--color-primary-light);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    margin-bottom: 4rem;
+    font-size: 1.8rem;
 }
 
 .about__subtitle {
